@@ -10,17 +10,5 @@
     <string name="avgLengthLabel">Average Length</string>
     <string name="numEntry">0</string>
     <string name="avgLength">0</string>
-    <string-array name="mobileOS">
-        <item>Android</item>
-        <item>Blackberry</item>
-        <item>iOS</item>
-        <item>Windows Phone</item>
-        <item>Blackberry</item>
-        <item>iOS2</item>
-        <item>Windows2 Phone</item>
-        <item>Blac2kberry</item>
-        <item>iO1S</item>
-        <item>Wi21ndows Phone</item>
-    </string-array>
 
 </resources>
