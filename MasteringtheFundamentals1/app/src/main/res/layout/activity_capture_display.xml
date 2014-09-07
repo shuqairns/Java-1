@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".CaptureDisplay"
+    android:background="#ffffffff">
+
+    <EditText
+        android:layout_width="275dp"
+        android:layout_height="60dp"
+        android:id="@+id/userEntry"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:singleLine="true"
+        android:hint="@string/something"
+        android:textColor="#ffff272b"
+        android:textColorHint="#ffffb6b3"
+        android:textSize="45sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="@string/submit"
+        android:id="@+id/submitButton"
+        android:background="#ffffffff"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:textColor="#ff3d3d3d"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:enabled="true"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/numEntryLabel"
+        android:id="@+id/textView"
+        android:layout_below="@+id/userEntry"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/avgLengthLabel"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/avgLength"
+        android:layout_alignRight="@+id/submitButton"
+        android:layout_alignEnd="@+id/submitButton"
+        android:layout_marginRight="40dp" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="@string/numEntry"
+        android:id="@+id/numEntries"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="50dp"
+        android:lines="1"
+        android:gravity="center"
+        android:textColor="#ffff1c38"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="@string/avgLength"
+        android:id="@+id/avgLength"
+        android:lines="1"
+        android:gravity="center"
+        android:textColor="#ffff1c38"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:layout_toEndOf="@+id/userEntry"
+        android:layout_toRightOf="@+id/userEntry"
+        android:layout_alignTop="@+id/numEntries"
+        android:layout_alignRight="@+id/submitButton"
+        android:layout_alignEnd="@+id/submitButton"
+        android:layout_marginRight="50dp"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="260dp"
+        android:id="@+id/entryList"
+        android:layout_below="@+id/numEntries"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:entries="@array/mobileOS"
+        android:layout_alignParentBottom="true"></ListView><![CDATA[
+    />
+
+    ]]>
+</RelativeLayout>
