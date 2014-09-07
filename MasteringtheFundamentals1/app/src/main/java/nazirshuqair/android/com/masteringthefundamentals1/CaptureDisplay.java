@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -24,7 +26,10 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
 
     final String TAG = "Mastering Fundamentals Log: ";
     private TextView mUserEntry;
-    private HashSet<String> countrySet = new HashSet<String>();
+    private Integer mAvgInt = 0;
+
+    private HashSet<String> mCountrySet = new HashSet<String>();
+    private ListView mCountryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +40,6 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
 
         Button submitBtn = (Button) findViewById(R.id.submitButton);
         submitBtn.setOnClickListener(this);
-
-        ListView countryList = (ListView) findViewById(R.id.entryList);
-        countryList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i(TAG, "List Item selected");
-
-                TextView selected = (TextView) view;
-
-                createAlert(selected.getText().toString());
-
-            }
-        });
-
     }
 
 
@@ -78,13 +69,37 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
                 //DO something
                 Log.i(TAG, "Button Clicked");
 
-                //Toast Alert code
-                Context context = getApplicationContext();
+                if (mUserEntry.getText().length() > 0){
+                    //
+                    mCountrySet.add(mUserEntry.getText().toString());
+                    //Updating the list view
+                    populateListView();
+
+                }
+
+                mCountrySet.add(mUserEntry.getText().toString());
+                //Updating the list view
+                populateListView();
+
+
+                //Updates the number of entires
+                TextView numEntries = (TextView) findViewById(R.id.numEntries);
+                numEntries.setText(String.valueOf(mCountrySet.size()));
+
+                //Updates the Average length
+                TextView avgLength = (TextView) findViewById(R.id.avgLength);
+                mAvgInt = mAvgInt + mUserEntry.getText().length();
+                Integer mAvgResult = mAvgInt / mCountrySet.size();
+                Log.i(TAG, String.valueOf(mUserEntry.getText().length()));
+                Log.i(TAG, String.valueOf((mAvgInt)));
+
+                avgLength.setText(String.valueOf(mAvgResult));
 
                 //Clear Textfield data
                 mUserEntry.setText("");
 
                 // Toast Alert Code
+                Context context = getApplicationContext();
                 CharSequence text = "Saved!";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
@@ -95,6 +110,37 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
         }
 
     }
+
+    private void populateListView() {
+
+        //List to hold all set elements to populate listview
+        ArrayList<String> toPopulateList = new ArrayList<String>(mCountrySet);
+
+        //Build Adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this,
+                R.layout.list_item,
+                toPopulateList);
+
+        //Configure the List View
+
+        mCountryList = (ListView) findViewById(R.id.entryList);
+        mCountryList.setAdapter(adapter);
+
+        //mAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, mCountrySet);
+        mCountryList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i(TAG, "List Item selected");
+
+                TextView selected = (TextView) view;
+                createAlert(selected.getText().toString());
+
+            }
+        });
+
+    }
+
 
     // This is to create the detail alerts
     public void createAlert(String selected){

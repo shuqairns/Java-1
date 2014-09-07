@@ -104,7 +104,6 @@
         android:layout_below="@+id/numEntries"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:entries="@array/mobileOS"
         android:layout_alignParentBottom="true"></ListView><![CDATA[
     />
 
