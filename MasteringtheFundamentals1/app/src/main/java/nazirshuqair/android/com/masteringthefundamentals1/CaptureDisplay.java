@@ -5,8 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +24,6 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
 
     final String TAG = "Mastering Fundamentals Log: ";
     private TextView mUserEntry;
-    private Integer mAvgInt = 0;
 
     private HashSet<String> mCountrySet = new HashSet<String>();
     private ListView mCountryList;
@@ -42,26 +39,6 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
         submitBtn.setOnClickListener(this);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.capture_display, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void onClick(View v){
 
         switch(v.getId()){
@@ -70,45 +47,59 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
                 Log.i(TAG, "Button Clicked");
 
                 if (mUserEntry.getText().length() > 0){
-                    //
+                    //Adding user Input to Set
                     mCountrySet.add(mUserEntry.getText().toString());
                     //Updating the list view
                     populateListView();
 
+                    //Updates the number of entires
+                    TextView numEntries = (TextView) findViewById(R.id.numEntries);
+                    numEntries.setText(String.valueOf(mCountrySet.size()));
+
+                    //Updates the Average length
+                    avgLengthM();
+
+                    // Toast Alert Code
+                    Context context = getApplicationContext();
+                    CharSequence text = "Saved!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 400);
+                }else {
+                    // Toast Alert Code
+                    Context context = getApplicationContext();
+                    CharSequence text = "Nothing to Save";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 400);
                 }
-
-                mCountrySet.add(mUserEntry.getText().toString());
-                //Updating the list view
-                populateListView();
-
-
-                //Updates the number of entires
-                TextView numEntries = (TextView) findViewById(R.id.numEntries);
-                numEntries.setText(String.valueOf(mCountrySet.size()));
-
-                //Updates the Average length
-                TextView avgLength = (TextView) findViewById(R.id.avgLength);
-                mAvgInt = mAvgInt + mUserEntry.getText().length();
-                Integer mAvgResult = mAvgInt / mCountrySet.size();
-                Log.i(TAG, String.valueOf(mUserEntry.getText().length()));
-                Log.i(TAG, String.valueOf((mAvgInt)));
-
-                avgLength.setText(String.valueOf(mAvgResult));
 
                 //Clear Textfield data
                 mUserEntry.setText("");
 
-                // Toast Alert Code
-                Context context = getApplicationContext();
-                CharSequence text = "Saved!";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-                toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 400);
-
                 break;
         }
 
+    }
+
+    // Average Length Method
+    private void avgLengthM(){
+
+        Iterator<String> iter = mCountrySet.iterator();
+        TextView avgLength = (TextView) findViewById(R.id.avgLength);
+        Integer avgInt = 0;
+        Integer avgResult = 0;
+
+        while (iter.hasNext()){
+            avgInt = avgInt + iter.next().length();
+            avgResult = avgInt / mCountrySet.size();
+            Log.i(TAG, String.valueOf(mUserEntry.getText().length()));
+            Log.i(TAG, String.valueOf((avgInt)));
+        }
+
+        avgLength.setText(String.valueOf(avgResult));
     }
 
     private void populateListView() {
@@ -143,10 +134,10 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
 
 
     // This is to create the detail alerts
-    public void createAlert(String selected){
+    public void createAlert(String _selected){
 
         AlertDialog ad = new AlertDialog.Builder(this)
-                .setMessage(selected)
+                .setMessage(_selected)
                 .setTitle("More Info")
                 .setNeutralButton("Ok", this)
                 .setCancelable(false)
@@ -155,9 +146,9 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
 
     }
 
-    public void onClick(DialogInterface dialog, int which){
+    public void onClick(DialogInterface _dialog, int _which){
 
-        switch (which){
+        switch (_which){
 
             case DialogInterface.BUTTON_NEUTRAL: //No
                 //Do nothing
