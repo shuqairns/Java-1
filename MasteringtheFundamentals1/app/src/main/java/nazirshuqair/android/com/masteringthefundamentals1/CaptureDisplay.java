@@ -14,7 +14,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.util.Log;
@@ -26,7 +25,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 
-public class CaptureDisplay extends Activity implements View.OnClickListener, DialogInterface.OnClickListener{
+public class CaptureDisplay extends Activity implements View.OnClickListener{
 
     //Debugging Tag
     final String TAG = "Mastering Fundamentals Log: ";
@@ -44,7 +43,7 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
         //connecting the user entry textView to variable
         mUserEntry = (TextView) findViewById(R.id.userEntry);
         //connecting button to variable
-        Button submitBtn = (Button) findViewById(R.id.submitButton);
+        TextView submitBtn = (TextView) findViewById(R.id.submitButton);
         //launches when a button is pressed
         submitBtn.setOnClickListener(this);
     }
@@ -60,17 +59,9 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
                     mCountrySet.add(mUserEntry.getText().toString());
                     //Updating the list view
                     populateListView();
-
-                    //Updates the number of entires
-                    TextView numEntries = (TextView) findViewById(R.id.numEntries);
-                    numEntries.setText(String.valueOf(mCountrySet.size()));
-
-                    //Updates the Average length
-                    avgLengthM();
-
                     // Toast Alert Code
                     Context context = getApplicationContext();
-                    CharSequence text = "Saved!";
+                    CharSequence text = getResources().getString(R.string.toastSaved);
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
@@ -78,7 +69,7 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
                 }else { //If nothing is entered, display alert/ don't do anything else
                     // Toast Alert Code
                     Context context = getApplicationContext();
-                    CharSequence text = "Nothing to Save";
+                    CharSequence text = getResources().getString(R.string.toastNotSaved);
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
@@ -93,20 +84,15 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
 
     }
 
-    public void onClick(DialogInterface _dialog, int _which){
-        switch (_which){
-            case DialogInterface.BUTTON_NEUTRAL: //No
-                //Do nothing
-                Log.i(TAG, "Ok pressed");
-
-                break;
-            default:
-                break;
-        }
-    }
-
     //Method to update the listView
     private void populateListView() {
+
+        //Updates the number of entires
+        TextView numEntries = (TextView) findViewById(R.id.numEntries);
+        numEntries.setText(String.valueOf(mCountrySet.size()));
+
+        //Updates the Average length
+        avgLengthM();
 
         //List to hold all set elements to populate listview
         ArrayList<String> toPopulateList = new ArrayList<String>(mCountrySet);
@@ -158,12 +144,26 @@ public class CaptureDisplay extends Activity implements View.OnClickListener, Di
     }
 
     // This is to create the detail alerts
-    public void createAlert(String _selected){
+    public void createAlert(final String _selected){
 
         AlertDialog ad = new AlertDialog.Builder(this)
                 .setMessage(_selected)
                 .setTitle("More Info")
-                .setNeutralButton("Ok", this)
+                .setNeutralButton(R.string.alertOk, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Do nothing
+                        Log.i(TAG, "Ok pressed");
+                    }
+                })
+                .setNegativeButton(R.string.alertCancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Remove cell
+                        Log.i(TAG, "Remove pressed");
+
+                        mCountrySet.remove(_selected);
+                        populateListView();
+                    }
+                })
                 .setCancelable(false)
                 .create();
         ad.show();

@@ -23,15 +23,15 @@
         android:textSize="45sp"
         android:textStyle="bold" />
 
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+    <TextView
+        android:layout_width="55dp"
+        android:layout_height="59dp"
         android:text="@string/submit"
         android:id="@+id/submitButton"
-        android:background="#ffffffff"
+        android:background="#ffff01b4"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:textColor="#ff3d3d3d"
+        android:textColor="#ffffffff"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

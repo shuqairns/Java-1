@@ -2,13 +2,16 @@
 <resources>
 
     <string name="app_name">MasteringtheFundamentals1</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="submit">OK</string>
     <string name="something">Type Here!</string>
     <string name="numEntryLabel"># Entries</string>
     <string name="avgLengthLabel">Average Length</string>
     <string name="numEntry">0</string>
     <string name="avgLength">0</string>
+    <string name="toastSaved">Saved!</string>
+    <string name="toastNotSaved">Nothing Saved</string>
+    <string name="alertOk">OK</string>
+    <string name="alertCancel">Remove</string>
+
 
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MasteringtheFundamentals1</string>
+    <string name="submit">Okay</string>
+    <string name="something">Escriba aquí!</string>
+    <string name="numEntryLabel"># Entradas</string>
+    <string name="avgLengthLabel">Duración media</string>
+    <string name="numEntry">0</string>
+    <string name="avgLength">0</string>
+    <string name="toastSaved">Guardado!</string>
+    <string name="toastNotSaved">Nada salvó</string>
+    <string name="alertOk">Okay</string>
+    <string name="alertCancel">Quitar</string>
+
+</resources>

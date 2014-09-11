@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MasteringtheFundamentals1</string>
+    <string name="submit">OK</string>
+    <string name="something">اكتب هنا !</string>
+    <string name="numEntryLabel"># مقالات</string>
+    <string name="avgLengthLabel">متوسط ​​طول</string>
+    <string name="numEntry">0</string>
+    <string name="avgLength">0</string>
+    <string name="toastSaved">حفظ !</string>
+    <string name="toastNotSaved">لا شيء المحفوظة</string>
+    <string name="alertOk">OK</string>
+    <string name="alertCancel">إزالة</string>
+
+
+</resources>
