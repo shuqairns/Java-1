@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Adapters Example</string>
+    
+    <string name="years">%1$d years</string>
+    <string name="base_adapter">BaseAdapter</string>
+    <string name="array_adapter">ArrayAdapter</string>
+    <string name="simple_adapter">SimpleAdapter</string>
+
+</resources>
