@@ -10,51 +10,51 @@ public class Sites {
                                     int _siteImage){
 
         Sites site = new Sites();
-        site.setsName(_name);
-        site.setsUrl(_url);
-        site.setsImage(_siteImage);
+        site.setmName(_name);
+        site.setmUrl(_url);
+        site.setmImage(_siteImage);
         return site;
 
     }
 
-    private String sName;
-    private String sUrl;
-    private int sImage;
+    private String mName;
+    private String mUrl;
+    private int mImage;
 
     public Sites(){
 
-        sImage = 0;
-        sName = sUrl = "";
+        mImage = 0;
+        mName = mUrl = "";
     }
 
     public Sites(String _name, String _url, int _siteImage){
-        sName = _name;
-        sUrl = _url;
-        sImage = _siteImage;
+        mName = _name;
+        mUrl = _url;
+        mImage = _siteImage;
     }
 
-    public int getsImage(){
-        return sImage;
+    public int getmImage(){
+        return mImage;
     }
 
-    public void setsImage(int _image){
-        sImage = _image;
+    public void setmImage(int _image){
+        mImage = _image;
     }
 
-    public String getsName(){
-        return sName;
+    public String getmName(){
+        return mName;
     }
 
-    public void setsName(String _name){
-        sName = _name;
+    public void setmName(String _name){
+        mName = _name;
     }
 
-    public String getsUrl(){
-        return sUrl;
+    public String getmUrl(){
+        return mUrl;
     }
 
-    public void setsUrl(String _url){
-        sUrl = _url;
+    public void setmUrl(String _url){
+        mUrl = _url;
     }
 
 }
