@@ -1,3 +1,8 @@
+/*
+Nazir Shuqair
+Project 3 - Working with Advanced Views
+Java 1 - 1409
+ */
 package nazirshuqair.android.com.java1project2;
 
 /**
@@ -5,6 +10,7 @@ package nazirshuqair.android.com.java1project2;
  */
 public class Sites {
 
+    // This is to create a new Object
     public static Sites newInstance(String _name,
                                     String _url,
                                     int _siteImage){
@@ -32,6 +38,8 @@ public class Sites {
         mUrl = _url;
         mImage = _siteImage;
     }
+
+    // Getter & setters methods
 
     public int getmImage(){
         return mImage;
