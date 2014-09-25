@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +16,12 @@ import android.widget.Toast;
 
 import com.android.nazirshuqair.simpleweather.model.Weather;
 import com.android.nazirshuqair.simpleweather.parser.WeatherJSONParser;
+import com.android.nazirshuqair.simpleweather.textViewHelper.AutoResizeTextView;
+import com.loopj.android.image.SmartImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -42,9 +42,11 @@ public class MainActivity extends Activity {
     EditText zipEntry;
     @InjectView(R.id.updateButton)
     Button updateButton;
-    @InjectView(R.id.cityRegion) TextView cityRegion;
+    @InjectView(R.id.cityRegion)AutoResizeTextView cityRegion;
     @InjectView(R.id.tempLabel) TextView tempLabel;
-    @InjectView(R.id.tempTextLabel) TextView tempTextLabel;
+    @InjectView(R.id.tempTextLabel) AutoResizeTextView tempTextLabel;
+
+    SmartImageView myImage;
 
     //This needs to be cleaned up by a gridview
     @InjectView(R.id.forcast1) TextView forcast1;
@@ -67,17 +69,19 @@ public class MainActivity extends Activity {
         String apiUrlPart2 = "%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
         String fullURL = apiUrlPart1 + zipEntry.getText().toString() + apiUrlPart2;
 
-        Log.i(TAG, fullURL);
-        if (isOnline()){
-            requestData(fullURL);
-
+        if (zipEntry.getText().length() > 5){
+            Toast.makeText(this, "Please enter a valid Zip Code", Toast.LENGTH_LONG).show();
+        }else if (zipEntry.getText().length() < 5){
+            Toast.makeText(this, "Please enter a valid Zip Code", Toast.LENGTH_LONG).show();
         }else {
-            Toast.makeText(this, "No network", Toast.LENGTH_LONG).show();
+            Log.i(TAG, fullURL);
+            if (isOnline()){
+                requestData(fullURL);
+
+            }else {
+                Toast.makeText(this, "No network", Toast.LENGTH_LONG).show();
+            }
         }
-
-
-
-
 
     }
     @Override
@@ -87,6 +91,10 @@ public class MainActivity extends Activity {
 
         pb = (ProgressBar) findViewById(R.id.progressBar1);
         pb.setVisibility(View.INVISIBLE);
+
+        //myImage = (SmartImageView) this.findViewById(R.id.testImage);
+        //myImage.setImageUrl("http://www.sr-tour.com/LostLandSinai/style/images/weather.png");
+
 
         ButterKnife.inject(this);
 
@@ -109,8 +117,10 @@ public class MainActivity extends Activity {
                 //will output some text for testing here
 
                 cityRegion.setText(weather.getCity() + ", " + weather.getRegion());
+                cityRegion.resizeText();
                 tempLabel.setText(String.valueOf(weather.getTemperature()));
                 tempTextLabel.setText(weather.getTempText());
+                tempTextLabel.resizeText();
 
                 JSONArray forcastOutput = weather.getForecastJSON();
 
