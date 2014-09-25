@@ -27,10 +27,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/forcast5"
-        android:layout_alignEnd="@+id/forcast5"
         android:gravity="center"
-        android:text="20176" />
+        android:layout_alignRight="@+id/updateButton"
+        android:layout_alignEnd="@+id/updateButton"
+        android:background="@null"/>
 
     <Button
         android:layout_width="60dp"
@@ -61,8 +61,7 @@
         android:textColor="#ffffffff"
         android:textSize="50dp"
         android:typeface="normal"
-        android:textAlignment="center"
-        android:text="Leesburg, VA" />
+        android:textAlignment="center" />
 
     <TextView
         android:layout_width="140dp"
@@ -73,8 +72,7 @@
         android:textSize="120dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/progressBar1"
-        android:layout_toStartOf="@+id/progressBar1"
-        android:text="68" />
+        android:layout_toStartOf="@+id/progressBar1" />
 
     <com.android.nazirshuqair.simpleweather.textViewHelper.AutoResizeTextView
         android:layout_width="200dp"
@@ -84,131 +82,28 @@
         android:textSize="42dp"
         android:layout_toStartOf="@+id/updateButton"
         android:gravity="center"
-        android:text="Mostly cloudy"
         android:layout_toEndOf="@+id/progressBar1"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/progressBar1" />
 
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text=""
-        android:id="@+id/forcast1"
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:id="@+id/forecastGrid"
         android:layout_below="@+id/tempLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="76dp"
-        android:textColor="#ffffffff"
-        android:textSize="30dp"
-        android:gravity="center" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text=""
-        android:id="@+id/forcast2"
-        android:textColor="#ffffffff"
-        android:textSize="30dp"
+        android:layout_marginTop="33dp"
+        android:clickable="true"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="50dp"
+        android:numColumns="auto_fit"
+        android:choiceMode="singleChoice"
+        android:columnWidth="60dp"
+        android:fastScrollEnabled="true"
         android:gravity="center"
-        android:layout_alignBottom="@+id/forcast1"
-        android:layout_toRightOf="@+id/forcast1"
-        android:layout_toEndOf="@+id/forcast1" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text=""
-        android:id="@+id/forcast3"
-        android:textColor="#ffffffff"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:layout_alignBottom="@+id/forcast2"
-        android:layout_toRightOf="@+id/forcast2"
-        android:layout_toEndOf="@+id/forcast2" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text=""
-        android:id="@+id/forcast4"
-        android:textColor="#ffffffff"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:layout_alignTop="@+id/forcast3"
-        android:layout_toRightOf="@+id/forcast3"
-        android:layout_toEndOf="@+id/forcast3" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:text=""
-        android:id="@+id/forcast5"
-        android:textColor="#ffffffff"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:layout_alignTop="@+id/forcast4"
-        android:layout_toRightOf="@+id/forcast4"
-        android:layout_toEndOf="@+id/forcast4" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="120dp"
-        android:text=""
-        android:id="@+id/forcast1details"
-        android:layout_below="@+id/forcast1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="15dp"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:textColor="#ffffffff" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="120dp"
-        android:text=""
-        android:id="@+id/forcast2details"
-        android:textSize="15dp"
-        android:layout_alignTop="@+id/forcast1details"
-        android:layout_toRightOf="@+id/forcast1details"
-        android:layout_toEndOf="@+id/forcast1details"
-        android:gravity="center"
-        android:textColor="#ffffffff" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="120dp"
-        android:text=""
-        android:id="@+id/forcast3details"
-        android:textSize="15dp"
-        android:layout_below="@+id/forcast2"
-        android:layout_toRightOf="@+id/forcast2"
-        android:layout_toEndOf="@+id/forcast2"
-        android:gravity="center"
-        android:textColor="#ffffffff" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="120dp"
-        android:text=""
-        android:id="@+id/forcast4details"
-        android:textSize="15dp"
-        android:layout_below="@+id/forcast3"
-        android:layout_toRightOf="@+id/forcast3"
-        android:layout_toEndOf="@+id/forcast3"
-        android:gravity="center"
-        android:textColor="#ffffffff" />
-
-    <TextView
-        android:layout_width="70dp"
-        android:layout_height="120dp"
-        android:text=""
-        android:id="@+id/forcast5details"
-        android:textSize="15dp"
-        android:layout_below="@+id/forcast4"
-        android:layout_toRightOf="@+id/forcast4"
-        android:layout_toEndOf="@+id/forcast4"
-        android:gravity="center"
-        android:textColor="#ffffffff" />
+        android:stackFromBottom="false"
+        android:stretchMode="spacingWidth"
+        android:textAlignment="center" />
 
 </RelativeLayout>

@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +22,9 @@ import com.android.nazirshuqair.simpleweather.textViewHelper.AutoResizeTextView;
 import com.loopj.android.image.SmartImageView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -33,6 +36,11 @@ public class MainActivity extends Activity {
 
     //Debugging Tag
     final String TAG = "Simple Weather Log: ";
+
+    final String DAY = "day";
+    final String TEXT = "text";
+    final String HIGH = "high";
+    final String LOW = "low";
 
     ProgressBar pb;
 
@@ -48,20 +56,6 @@ public class MainActivity extends Activity {
 
     SmartImageView myImage;
 
-    //This needs to be cleaned up by a gridview
-    @InjectView(R.id.forcast1) TextView forcast1;
-    @InjectView(R.id.forcast2) TextView forcast2;
-    @InjectView(R.id.forcast3) TextView forcast3;
-    @InjectView(R.id.forcast4) TextView forcast4;
-    @InjectView(R.id.forcast5) TextView forcast5;
-    @InjectView(R.id.forcast1details) TextView forcast1details;
-    @InjectView(R.id.forcast2details) TextView forcast2details;
-    @InjectView(R.id.forcast3details) TextView forcast3details;
-    @InjectView(R.id.forcast4details) TextView forcast4details;
-    @InjectView(R.id.forcast5details) TextView forcast5details;
-
-    TextView[] forcastDays = {forcast1, forcast2, forcast3, forcast4, forcast5};
-    TextView[] forcastDetails = {forcast1details, forcast2details, forcast3details, forcast4details, forcast5details};
 
     @OnClick(R.id.updateButton)void runRequest(){
 
@@ -122,44 +116,8 @@ public class MainActivity extends Activity {
                 tempTextLabel.setText(weather.getTempText());
                 tempTextLabel.resizeText();
 
-                JSONArray forcastOutput = weather.getForecastJSON();
+                populateListView(weather);
 
-                if (forcastOutput != null){
-                    int len = forcastOutput.length();
-                    for (int i = 0; i <= len; i++){
-                        try {
-                            String day = forcastOutput.getJSONObject(i).getString("day");
-                            String text = forcastOutput.getJSONObject(i).getString("text");
-                            String high = forcastOutput.getJSONObject(i).getString("high");
-                            String low = forcastOutput.getJSONObject(i).getString("low");
-
-                            switch (i){
-                                case 0:
-                                    forcast1.setText(day);
-                                    forcast1details.setText(text + "\n \nH:" + high + "\nL:" + low);
-                                    break;
-                                case 1:
-                                    forcast2.setText(day);
-                                    forcast2details.setText(text + "\n \nH:" + high + "\nL:" + low);
-                                    break;
-                                case 2:
-                                    forcast3.setText(day);
-                                    forcast3details.setText(text + "\n \nH:" + high + "\nL:" + low);
-                                    break;
-                                case 3:
-                                    forcast4.setText(day);
-                                    forcast4details.setText(text + "\n \nH:" + high + "\nL:" + low);
-                                    break;
-                                case 4:
-                                    forcast5.setText(day);
-                                    forcast5details.setText(text + "\n \nH:" + high + "\nL:" + low);
-                                    break;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    };
-                }
             }
         }
 
@@ -207,6 +165,10 @@ public class MainActivity extends Activity {
 
             weatherList = WeatherJSONParser.parseFeed(result);
 
+            if (weatherList == null){
+                Toast.makeText(MainActivity.this, "Zip code is Invalid!", Toast.LENGTH_LONG).show();
+            }
+
             updateDisplay();
         }
 
@@ -217,4 +179,50 @@ public class MainActivity extends Activity {
 
     }
 
+    private void populateListView(Weather weather) {
+
+        JSONArray forcastOutput = weather.getForecastJSON();
+
+        // List of elements in our adapter
+        ArrayList<HashMap<String, Object>> mForecastList = new ArrayList<HashMap<String, Object>>();
+
+        // Goes through each site and maps the data elements to a String key
+
+        for (int i = 0; i < forcastOutput.length(); i++) {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            try {
+                map.put(DAY, forcastOutput.getJSONObject(i).getString(DAY));
+                map.put(TEXT, forcastOutput.getJSONObject(i).getString(TEXT));
+                map.put(HIGH, "H: " + forcastOutput.getJSONObject(i).getString(HIGH));
+                map.put(LOW, "L: " + forcastOutput.getJSONObject(i).getString(LOW));
+
+                mForecastList.add(map);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Creating an array of our keys
+        String[] keys = new String[] {
+                DAY, TEXT, HIGH, LOW
+        };
+
+        // Creating an array of our list item components.
+        // Indices must match the keys array.
+        int[] views = new int[] {
+                R.id.forecastDayLabel,
+                R.id.forecastTextLabel,
+                R.id.forecastHighLabel,
+                R.id.forecastLowLabel
+        };
+
+
+        // Creating a new SimpleAdapter that maps values to views using our keys and views arrays.
+        SimpleAdapter adapter = new SimpleAdapter(this, mForecastList, R.layout.grid_layout_view, keys, views);
+
+            //Otherwise create a listview and set the adapter to it
+            GridView mForcastGridView = (GridView) findViewById(R.id.forecastGrid);
+            mForcastGridView.setAdapter(adapter);
+    }
 }

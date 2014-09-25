@@ -2,8 +2,6 @@ package com.android.nazirshuqair.simpleweather.model;
 
 import org.json.JSONArray;
 
-import java.util.ArrayList;
-
 /**
  * Created by nazirshuqair on 9/21/14.
  */
