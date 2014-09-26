@@ -82,9 +82,13 @@
         android:textSize="42dp"
         android:layout_toStartOf="@+id/updateButton"
         android:gravity="center"
-        android:layout_toEndOf="@+id/progressBar1"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/progressBar1" />
+        android:layout_toEndOf="@+id/tempLabel"
+        android:layout_toRightOf="@+id/tempLabel"
+        android:layout_alignBottom="@+id/tempLabel"
+        android:layout_alignTop="@+id/tempLabel"
+        android:layout_alignRight="@+id/cityRegion"
+        android:layout_alignEnd="@+id/cityRegion" />
 
     <GridView
         android:layout_width="wrap_content"

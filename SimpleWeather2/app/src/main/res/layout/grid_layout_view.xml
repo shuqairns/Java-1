@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/forecastDayLabel"
         android:textColor="#ffffffff"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_centerVertical="true"/>
     <TextView
         android:layout_width="fill_parent"

@@ -90,6 +90,7 @@ public class MainActivity extends Activity {
         //myImage.setImageUrl("http://www.sr-tour.com/LostLandSinai/style/images/weather.png");
 
 
+
         ButterKnife.inject(this);
 
     }
