@@ -1,17 +1,16 @@
+/*
+Nazir Shuqair
+Java 1 - 1409
+Final Project
+ */
 package com.android.nazirshuqair.simpleweather.parser;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.android.nazirshuqair.simpleweather.MainActivity;
 import com.android.nazirshuqair.simpleweather.model.Weather;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by nazirshuqair on 9/21/14.

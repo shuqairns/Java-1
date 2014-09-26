@@ -1,3 +1,9 @@
+/*
+Nazir Shuqair
+Java 1 - 1409
+Final Project
+ */
+
 package com.android.nazirshuqair.simpleweather;
 
 import android.app.Activity;
@@ -48,13 +54,9 @@ public class MainActivity extends Activity {
 
     @InjectView(R.id.zipEntry)
     EditText zipEntry;
-    @InjectView(R.id.updateButton)
-    Button updateButton;
     @InjectView(R.id.cityRegion)AutoResizeTextView cityRegion;
     @InjectView(R.id.tempLabel) TextView tempLabel;
     @InjectView(R.id.tempTextLabel) AutoResizeTextView tempTextLabel;
-
-    SmartImageView myImage;
 
 
     @OnClick(R.id.updateButton)void runRequest(){
